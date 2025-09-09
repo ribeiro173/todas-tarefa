@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarefa — Link Direto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ====== ESTILO BASE ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f, #121212);
+      color: #eaeaea;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background: rgba(20, 20, 30, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    header svg {
+      width: 42px;
+      height: 42px;
+      fill: #8b5cf6;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    header .subtitle {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* ====== LISTA ====== */
+    .list {
+      width: 90%;
+      max-width: 600px;
+      margin: 60px auto;
+      background: rgba(30,30,45,0.85);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      text-align: center;
+      animation: fadeIn 0.7s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .list h2 {
+      color: #8b5cf6;
+      margin-bottom: 20px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-open {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+    }
+    .btn-open:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+    }
+
+    .btn-code {
+      background: #3b3b5c;
+      color: #fff;
+    }
+    .btn-code:hover {
+      background: #4b4b6d;
+      transform: scale(1.05);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #666;
+      background: #181820;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer span {
+      color: #8b5cf6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg viewBox="0 0 16 16"><path d="M8 .198a7.802 7.802 0 00-2.466 15.218c.39.072.533-.17.533-.378 0-.186-.007-.679-.01-1.333-2.168.471-2.625-1.044-2.625-1.044-.354-.901-.866-1.143-.866-1.143-.708-.484.054-.474.054-.474.783.055 1.195.805 1.195.805.696 1.193 1.826.849 2.271.65.071-.506.273-.85.497-1.046-1.732-.197-3.553-.866-3.553-3.854 0-.852.305-1.55.805-2.096-.081-.197-.349-.99.077-2.063 0 0 .659-.211 2.16.8a7.47 7.47 0 011.968-.265c.67.003 1.345.09 1.968.265 1.5-1.01 2.158-.8 2.158-.8.428 1.073.16 1.866.08 2.063.5.546.803 1.244.803 2.096 0 2.994-1.825 3.653-3.563 3.846.281.244.532.725.532 1.462 0 1.055-.01 1.906-.01 2.165 0 .21.14.454.537.377A7.803 7.803 0 008 .198z"/></svg>
+    <div>
+      <h1>Tarefa</h1>
+      <div class="subtitle">Visualize e abra seu projeto</div>
+    </div>
+  </header>
+
+  <div class="list">
+    <h2>Projeto disponível</h2>
+    <p>Seu projeto está hospedado e pode ser acessado através dos botões abaixo:</p>
+
+    <div class="btn-group">
+      <a class="btn btn-open" href="https://ribeiro173.github.io/tarefa/tarefa.html" target="_blank">▶ Abrir Projeto</a>
+      <a class="btn btn-code" href="https://github.com/ribeiro173/tarefa/blob/main/tarefa.html" target="_blank">💻 Ver Código</a>
+    </div>
+  </div>
+
+  <footer>
+    Feito com <span>❤</span> por Gabriel
+  </footer>
+</body>
+</html>
