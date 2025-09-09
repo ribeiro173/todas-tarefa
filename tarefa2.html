@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarefa — Link Direto</title>
+  <title>All_Files — Navegador GitHub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* ====== ESTILO BASE ====== */
@@ -55,52 +55,135 @@
       color: #aaa;
     }
 
-    /* ====== LISTA ====== */
+    /* ====== CONTROLES ====== */
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 950px;
+    }
+
+    input[type=text] {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #1f1f2f;
+      border: 1px solid #333;
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    input[type=text]:focus {
+      border-color: #8b5cf6;
+      outline: none;
+      background: #2a2a3a;
+    }
+
+    button {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      color: white;
+      font-size: 1rem;
+      transition: transform 0.2s ease, background 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #9f7aea, #7c3aed);
+    }
+
+    /* ====== STATUS ====== */
+    .meta, #status {
+      margin: 10px auto;
+      max-width: 950px;
+      padding: 0 16px;
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+    /* ====== LISTAGEM ====== */
     .list {
       width: 90%;
-      max-width: 600px;
-      margin: 60px auto;
-      background: rgba(30,30,45,0.85);
-      padding: 30px;
+      max-width: 950px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .folder {
+      background: rgba(30,30,45,0.8);
+      border: 1px solid rgba(255,255,255,0.05);
       border-radius: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      text-align: center;
-      animation: fadeIn 0.7s ease;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .folder:hover {
+      transform: translateY(-3px);
+      background: rgba(35,35,50,0.9);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .list h2 {
+    .folder h3 {
+      font-size: 1.1rem;
       color: #8b5cf6;
-      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 8px;
+    }
+
+    .folder h3 .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    ul.open {
+      max-height: 1000px;
+    }
+
+    li {
+      background: rgba(255,255,255,0.03);
+      margin: 6px 0;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li:hover {
+      background: rgba(139,92,246,0.1);
+    }
+
+    .filename {
+      color: #fff;
+      font-size: 0.95rem;
     }
 
     .btn-group {
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 8px;
     }
 
     .btn {
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 1rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
       font-weight: 500;
-      transition: transform 0.2s, background 0.2s;
-      cursor: pointer;
-    }
-
-    .btn-open {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: white;
-    }
-    .btn-open:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #4ade80, #22c55e);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .btn-code {
@@ -109,6 +192,15 @@
     }
     .btn-code:hover {
       background: #4b4b6d;
+      transform: scale(1.05);
+    }
+
+    .btn-test {
+      background: #22c55e;
+      color: #fff;
+    }
+    .btn-test:hover {
+      background: #16a34a;
       transform: scale(1.05);
     }
 
@@ -132,23 +224,144 @@
   <header>
     <svg viewBox="0 0 16 16"><path d="M8 .198a7.802 7.802 0 00-2.466 15.218c.39.072.533-.17.533-.378 0-.186-.007-.679-.01-1.333-2.168.471-2.625-1.044-2.625-1.044-.354-.901-.866-1.143-.866-1.143-.708-.484.054-.474.054-.474.783.055 1.195.805 1.195.805.696 1.193 1.826.849 2.271.65.071-.506.273-.85.497-1.046-1.732-.197-3.553-.866-3.553-3.854 0-.852.305-1.55.805-2.096-.081-.197-.349-.99.077-2.063 0 0 .659-.211 2.16.8a7.47 7.47 0 011.968-.265c.67.003 1.345.09 1.968.265 1.5-1.01 2.158-.8 2.158-.8.428 1.073.16 1.866.08 2.063.5.546.803 1.244.803 2.096 0 2.994-1.825 3.653-3.563 3.846.281.244.532.725.532 1.462 0 1.055-.01 1.906-.01 2.165 0 .21.14.454.537.377A7.803 7.803 0 008 .198z"/></svg>
     <div>
-      <h1>Tarefa</h1>
-      <div class="subtitle">Visualize e abra seu projeto</div>
+      <h1>All_Files</h1>
+      <div class="subtitle">Explore e visualize arquivos direto do GitHub</div>
     </div>
   </header>
 
-  <div class="list">
-    <h2>Projeto disponível</h2>
-    <p>Seu projeto está hospedado e pode ser acessado através dos botões abaixo:</p>
-
-    <div class="btn-group">
-      <a class="btn btn-open" href="https://ribeiro173.github.io/tarefa/tarefa.html" target="_blank">▶ Abrir Projeto</a>
-      <a class="btn btn-code" href="https://github.com/ribeiro173/tarefa/blob/main/tarefa.html" target="_blank">💻 Ver Código</a>
-    </div>
+  <div class="controls">
+    <input id="search" type="text" placeholder="🔍 Pesquisar por nome ou extensão..." />
+    <button id="refresh">⟳ Atualizar</button>
   </div>
 
+  <div class="meta">
+    Repositório: <a id="repoLink" href="#" target="_blank"></a>
+  </div>
+  <div id="status" class="meta"></div>
+
+  <div class="list" id="filesList"></div>
+
   <footer>
-    Feito com <span>❤</span> por Gabriel
+    Feito com <span>❤</span> para navegação de repositórios no GitHub
   </footer>
+
+  <script>
+    const owner = 'corsa312';
+    const repo = 'All_Files';
+    const branch = 'main';
+    const repoUrl = `https://github.com/${owner}/${repo}`;
+    document.getElementById('repoLink').href = repoUrl;
+    document.getElementById('repoLink').textContent = repoUrl;
+
+    const statusEl = document.getElementById('status');
+    const filesList = document.getElementById('filesList');
+    const searchInput = document.getElementById('search');
+    const refreshBtn = document.getElementById('refresh');
+
+    async function loadTree() {
+      statusEl.textContent = '⏳ Carregando lista de arquivos...';
+      filesList.innerHTML = '';
+      try {
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+        const res = await fetch(apiUrl);
+        if(!res.ok) throw new Error('Erro ao acessar a API do GitHub: ' + res.status);
+        const data = await res.json();
+        const tree = data.tree || [];
+        statusEl.textContent = `✅ Arquivos encontrados: ${tree.length}`;
+        renderTree(tree);
+      } catch (err) {
+        statusEl.textContent = '❌ Falha: ' + err.message;
+      }
+    }
+
+    function renderTree(tree) {
+      const folders = {};
+      tree.forEach(item => {
+        if (item.type !== 'blob') return;
+        const parts = item.path.split('/');
+        const filename = parts.pop();
+        const folder = parts.length ? parts.join('/') : 'Raiz';
+        if (!folders[folder]) folders[folder] = [];
+        folders[folder].push({ path: item.path, filename, size: item.size });
+      });
+
+      const search = searchInput.value.trim().toLowerCase();
+
+      const folderKeys = Object.keys(folders).sort((a,b)=> a.localeCompare(b));
+      if(folderKeys.length === 0){
+        filesList.innerHTML = '<div class="meta">Nenhum arquivo encontrado.</div>';
+        return;
+      }
+
+      folderKeys.forEach(folder => {
+        const matches = folders[folder].filter(f => {
+          if (!search) return true;
+          return f.filename.toLowerCase().includes(search) || f.path.toLowerCase().includes(search);
+        });
+        if(matches.length === 0) return;
+
+        const folderDiv = document.createElement('div');
+        folderDiv.className = 'folder';
+
+        const h = document.createElement('h3');
+        const arrow = document.createElement('span');
+        arrow.textContent = '▶';
+        arrow.className = 'arrow';
+        h.appendChild(arrow);
+        h.appendChild(document.createTextNode(folder === 'Raiz' ? '📂 Raiz' : '📁 ' + folder));
+        folderDiv.appendChild(h);
+
+        const ul = document.createElement('ul');
+        matches.sort((a,b)=> a.filename.localeCompare(b.filename));
+        matches.forEach(f => {
+          const li = document.createElement('li');
+
+          const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${f.path}`;
+          const testUrl = `https://htmlpreview.github.io/?https://github.com/${owner}/${repo}/blob/${branch}/${f.path}`;
+
+          const filenameSpan = document.createElement('span');
+          filenameSpan.className = 'filename';
+          filenameSpan.textContent = f.filename;
+
+          const btnGroup = document.createElement('div');
+          btnGroup.className = 'btn-group';
+
+          const btnCode = document.createElement('a');
+          btnCode.href = rawUrl;
+          btnCode.target = '_blank';
+          btnCode.className = 'btn btn-code';
+          btnCode.textContent = 'Ver código';
+          btnGroup.appendChild(btnCode);
+
+          if(f.filename.toLowerCase().endsWith('.html')){
+            const btnTest = document.createElement('a');
+            btnTest.href = testUrl;
+            btnTest.target = '_blank';
+            btnTest.className = 'btn btn-test';
+            btnTest.textContent = '▶ Testar';
+            btnGroup.appendChild(btnTest);
+          }
+
+          li.appendChild(filenameSpan);
+          li.appendChild(btnGroup);
+
+          ul.appendChild(li);
+        });
+
+        folderDiv.appendChild(ul);
+        filesList.appendChild(folderDiv);
+
+        h.addEventListener('click', ()=>{
+          const isOpen = ul.classList.toggle('open');
+          arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0)';
+        });
+      });
+    }
+
+    refreshBtn.addEventListener('click', loadTree);
+    searchInput.addEventListener('input', () => loadTree());
+
+    loadTree();
+  </script>
 </body>
 </html>
